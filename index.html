@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Révisions Histoire 5e — Chapitre 2 : Chrétientés et Islam</title>
+<style>
+  :root{
+    --bg:#f6f1e7; --card:#fffdf8; --ink:#2b2b2b; --muted:#6b6b6b;
+    --green:#2e7d32; --green-l:#e6f4e7; --red:#c62828; --red-l:#fdeaea;
+    --gold:#b8860b; --blue:#1e5f8a; --blue-l:#e7f1f8; --border:#e2d9c6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); min-height:100vh;}
+  header{background:linear-gradient(135deg,#1e5f8a,#274b63); color:#fff; padding:22px 16px; text-align:center;}
+  header h1{font-size:1.35rem; font-weight:normal; letter-spacing:.5px;}
+  header p{opacity:.85; font-size:.9rem; margin-top:6px;}
+  nav{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; padding:14px; background:var(--card); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:5;}
+  nav button{font-family:inherit; font-size:.92rem; padding:8px 16px; border:1px solid var(--border); background:#faf7ee; border-radius:20px; cursor:pointer; transition:.15s;}
+  nav button:hover{background:#f0e9d8;}
+  nav button.active{background:var(--blue); color:#fff; border-color:var(--blue);}
+  main{max-width:900px; margin:0 auto; padding:20px 14px 60px;}
+  .panel{display:none;}
+  .panel.visible{display:block; animation:fade .25s;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1;}}
+  h2{font-family:inherit; font-weight:normal; font-size:1.2rem; margin:10px 0 14px; color:var(--blue); border-bottom:2px solid var(--gold); display:inline-block; padding-bottom:4px;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .card h3{font-weight:normal; color:var(--gold); font-size:1.05rem; margin-bottom:8px;}
+  .card ul{padding-left:20px; line-height:1.65; font-size:.98rem;}
+  .card li{margin-bottom:4px;}
+  .keyword{color:var(--blue); font-weight:bold;}
+  .date{color:var(--red); font-weight:bold;}
+  .tip{background:var(--blue-l); border-left:4px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; font-size:.9rem; margin:12px 0;}
+  .btn{font-family:inherit; font-size:1rem; padding:10px 22px; background:var(--blue); color:#fff; border:none; border-radius:8px; cursor:pointer; transition:.15s;}
+  .btn:hover{background:#27719f;}
+  .btn.secondary{background:#ece5d3; color:var(--ink);}
+  .btn.secondary:hover{background:#e0d6bd;}
+  /* Flashcards */
+  .flash-zone{max-width:560px; margin:0 auto; text-align:center;}
+  .flashcard{background:var(--card); border:2px solid var(--gold); border-radius:12px; min-height:220px; padding:30px 22px; display:flex; flex-direction:column; justify-content:center; cursor:pointer; transition:.2s; position:relative;}
+  .flashcard .term{font-size:1.5rem; color:var(--blue);}
+  .flashcard .def{font-size:1.05rem; line-height:1.7; display:none;}
+  .flashcard.flipped .term{display:none;}
+  .flashcard.flipped .def{display:block;}
+  .flashcard .hint{position:absolute; bottom:10px; left:0; right:0; font-size:.78rem; color:var(--muted); font-style:italic;}
+  .flash-nav{display:flex; justify-content:center; gap:12px; margin-top:16px; align-items:center;}
+  .flash-count{font-size:.9rem; color:var(--muted);}
+  .checkbox-row{margin:14px 0; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; font-size:.9rem;}
+  .checkbox-row label{cursor:pointer;}
+  /* QCM */
+  .qcm-header{display:flex; justify-content:space-between; font-size:.95rem; color:var(--muted); margin-bottom:10px;}
+  .question-text{font-size:1.15rem; margin-bottom:16px; line-height:1.5;}
+  .answers{display:grid; gap:10px;}
+  .answer{text-align:left; font-family:inherit; font-size:1rem; padding:12px 16px; border:1px solid var(--border); background:var(--card); border-radius:8px; cursor:pointer; transition:.15s; line-height:1.4;}
+  .answer:hover:not(:disabled){border-color:var(--blue); background:var(--blue-l);}
+  .answer.correct{background:var(--green-l); border-color:var(--green); color:var(--green);}
+  .answer.wrong{background:var(--red-l); border-color:var(--red); color:var(--red);}
+  .answer:disabled{cursor:default;}
+  .explanation{margin-top:14px; font-size:.95rem; background:#faf6ec; border-left:4px solid var(--gold); padding:10px 14px; border-radius:0 8px 8px 0; line-height:1.6;}
+  .result-box{text-align:center; padding:30px 20px;}
+  .result-box .score{font-size:2.2rem; color:var(--blue); margin-bottom:10px;}
+  .result-box .msg{font-size:1.1rem; margin-bottom:20px;}
+  /* Chronologie */
+  .chrono-pool, .chrono-zone{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; min-height:52px;}
+  .chrono-zone{min-height:80px; background:#f2ecdd; border:2px dashed var(--border); border-radius:10px; padding:10px;}
+  .chrono-chip{font-family:inherit; font-size:.95rem; padding:9px 14px; border-radius:8px; border:1px solid var(--border); background:var(--card); cursor:pointer; line-height:1.3;}
+  .chrono-chip.correct{background:var(--green-l); border-color:var(--green);}
+  .chrono-chip.wrong{background:var(--red-l); border-color:var(--red);}
+  /* Hybrid table */
+  table.hydra{width:100%; border-collapse:collapse; font-size:.95rem;}
+  table.hydra th, table.hydra td{border:1px solid var(--border); padding:8px 10px; text-align:left;}
+  table.hydra th{background:#efe7d2; font-weight:normal; color:var(--blue);}
+  table.hydra select{font-family:inherit; padding:4px; border:1px solid var(--border); border-radius:5px; background:#fff; max-width:100%;}
+  td.ok{background:var(--green-l);} td.ko{background:var(--red-l);}
+  footer{text-align:center; color:var(--muted); font-size:.8rem; padding:20px;}
+  .progress-bar{height:6px; background:#eee4cd; border-radius:3px; overflow:hidden; margin-bottom:16px;}
+  .progress-bar>div{height:100%; background:var(--gold); width:0; transition:width .3s;}
+  @media print{ nav,.btn,.flash-nav{display:none;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>🕌 Révisions — Histoire 5e</h1>
+  <p>Thème 1 · Chapitre 2 : De la naissance de l'islam à la prise de Bagdad par les Mongols (VII<sup>e</sup>-XIII<sup>e</sup> s.)</p>
+</header>
+
+<nav>
+  <button data-tab="fiches" class="active">📖 Les fiches</button>
+  <button data-tab="flash">🗂️ Flashcards</button>
+  <button data-tab="qcm">✅ QCM</button>
+  <button data-tab="chrono">⏳ Chronologie</button>
+  <button data-tab="califats">🏛️ Les califats</button>
+</nav>
+
+<main>
+  <!-- ============================================================ FICHES -->
+  <section id="fiches" class="panel visible">
+    <h2>Tout le chapitre en 6 fiches</h2>
+
+    <div class="card">
+      <h3>1 · La naissance de l'islam (VII<sup>e</sup> siècle)</h3>
+      <ul>
+        <li>L'islam naît au <span class="keyword">VII<sup>e</sup> siècle en Arabie</span>, peuplée de <span class="keyword">Bédouins</span> (tribus nomades) polythéistes : les Arabes.</li>
+        <li><span class="keyword">Muhammad</span> (Mahomet), un marchand de <span class="keyword">La Mecque</span>, affirme avoir reçu la « Révélation » : il est le <span class="keyword">prophète</span> d'un dieu unique, <span class="keyword">Allah</span>.</li>
+        <li>Chassé de La Mecque, il fuit à Médine : c'est l'<span class="keyword">Hégire</span> (622, année 0 du calendrier musulman).</li>
+        <li>En <span class="date">630</span>, Muhammad conquiert La Mecque avec une armée et convertit les Arabes à l'islam : l'Arabie devient le premier État musulman, dont il est le chef religieux, politique et militaire.</li>
+        <li>La religion s'organise autour du <span class="keyword">Coran</span> (114 sourates) et des <span class="keyword">5 piliers</span> : la prière, l'aumône, le ramadan, le pèlerinage à La Mecque, la profession de foi… et le <span class="keyword">djihad</span> (« l'effort » pour rester dans le droit chemin).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>2 · Sunnites et chiites</h3>
+      <p>Même religion, mêmes bases — la séparation vient d'une question de <span class="keyword">succession</span> : qui doit diriger la communauté après Muhammad ?</p>
+      <ul>
+        <li><span class="keyword">Sunnites</span> : le chef peut être choisi parmi les musulmans.</li>
+        <li><span class="keyword">Chiites</span> : le pouvoir doit revenir à <span class="keyword">Ali</span> (cousin et gendre de Muhammad) puis à ses descendants.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>3 · Le calife et le gouvernement de l'empire</h3>
+      <ul>
+        <li>À la mort de Muhammad (<span class="date">632</span>), Abu Bakr devient son « successeur » : le <span class="keyword">calife</span>.</li>
+        <li>Pouvoirs du calife : chef <span class="keyword">militaire</span> (conquêtes), <span class="keyword">religieux</span>, <span class="keyword">politique</span>, il protège la population et <span class="keyword">rend la justice</span>.</li>
+        <li>Il gouverne aidé du <span class="keyword">vizir</span> (premier ministre, administration) dans la capitale ; les <span class="keyword">émirs</span> dirigent les provinces (armée + impôts) et les <span class="keyword">cadis</span> rendent la justice.</li>
+        <li>Il développe son prestige en construisant mosquées, palais, souks, jardins… et le peuple vient jurer fidélité au pied du calife.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>4 · Les califats et l'expansion de l'islam</h3>
+      <ul>
+        <li>Les premiers califes (632-661), puis les <span class="keyword">Omeyyades</span> (661-750, capitale Damas) conquièrent un vaste empire : de l'Espagne jusqu'aux portes de l'Inde, grâce au <span class="keyword">djihad</span> armé contre les empires perse et byzantin.</li>
+        <li>En <span class="date">750</span> (bataille du Grand Zab), les <span class="keyword">Abbassides</span> renversent les Omeyyades : capitale <span class="keyword">Bagdad</span> (fondée en 762). C'est l'<span class="keyword">âge d'or</span> de l'islam médiéval.</li>
+        <li>Un survivant omeyyade, <span class="keyword">Abd al-Rahman Ier</span>, fonde l'émirat de <span class="keyword">Cordoue</span> en 756 en Al-Andalus.</li>
+        <li>Dès <span class="date">909</span>, les <span class="keyword">Fatimides</span>, <span class="keyword">chiites</span>, fondent un califat rival en Afrique du Nord puis conquièrent l'Égypte : ils créent <span class="keyword">Le Caire</span> (969).</li>
+        <li><span class="keyword">Les Turcs</span>, islamisés, prennent le pouvoir à Bagdad en <span class="date">1058</span> : le calife garde un rôle honorifique, ils prennent le titre de <span class="keyword">sultan</span>.</li>
+        <li>Au X<sup>e</sup> siècle, le monde musulman est donc <span class="keyword">divisé</span> entre plusieurs califats rivaux : Abbassides à Bagdad (sunnites), Fatimides au Caire (chiites), Omeyyades à Cordoue (sunnites).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>5 · Une brillante civilisation (VIII<sup>e</sup>-XIII<sup>e</sup> siècles)</h3>
+      <ul>
+        <li>Une civilisation <span class="keyword">urbaine</span> : la ville regroupe les pouvoirs (religieux : mosquée ; politique : palais du calife ; commercial : <span class="keyword">souks</span> ; culturel : écoles, bibliothèques).</li>
+        <li><span class="keyword">Bagdad</span>, capitale des Abbassides au bord du <span class="keyword">Tigre</span>, est riche et peuplée (≈ 1 million d'habitants), au croisement des routes commerciales : porcelaine et papier de Chine, épices et pierres précieuses d'Inde, or d'Afrique…</li>
+        <li>La <span class="keyword">Maison de la sagesse</span>, fondée par le calife <span class="keyword">al-Mamûn</span>, réunit des savants : mathématiques, astronomie, médecine, géographie.</li>
+        <li>Cette civilisation <span class="keyword">conserve, transmet et enrichit</span> les savoirs de l'Antiquité : elle contribue à la naissance de la science moderne en Europe.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>6 · Chrétientés et Islam : affrontements et échanges</h3>
+      <ul>
+        <li><span class="keyword">Croisades</span> (1095-1270) : expéditions militaires chrétiennes pour libérer la Terre sainte. En <span class="date">1095</span>, le pape <span class="keyword">Urbain II</span> lance la première croisade ; les croisés prennent Jérusalem en <span class="date">1099</span> et créent les États latins d'Orient ; <span class="keyword">Saladin</span> reprend Jérusalem en <span class="date">1187</span> ; le dernier État latin tombe en <span class="date">1291</span>.</li>
+        <li><span class="keyword">Reconquista</span> : reconquête lente de la péninsule ibérique par les royaumes chrétiens du Nord ; elle s'achève en <span class="date">1492</span> avec la prise de <span class="keyword">Grenade</span>.</li>
+        <li>Malgré les guerres, de nombreux <span class="keyword">échanges</span> : commerce de produits de luxe (épices, soieries, pierres précieuses, or), traductions des savants grecs en arabe puis en latin, transmission du <span class="keyword">chiffre zéro</span> et des savoirs médicaux.</li>
+        <li>En <span class="keyword">Al-Andalus</span>, musulmans, chrétiens et juifs se côtoient : la société est un espace de rencontres et d'échanges culturels.</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>Problématique du chapitre :</strong> Comment naît et se développe l'empire arabo-musulman ?<br>
+      <strong>⚠️ Attention :</strong> « islam » (la religion) sans majuscule — « l'Islam » (le peuple) avec majuscule.
+    </div>
+  </section>
+
+  <!-- ============================================================ FLASHCARDS -->
+  <section id="flash" class="panel">
+    <h2 style="display:block; text-align:center;">Flashcards : les notions</h2>
+    <div class="checkbox-row" id="flash-cats"></div>
+    <div class="flash-zone">
+      <div class="flashcard" id="flashcard">
+        <div class="term" id="fc-term"></div>
+        <div class="def" id="fc-def"></div>
+        <div class="hint">Clique sur la carte pour retourner</div>
+      </div>
+      <div class="flash-nav">
+        <button class="btn secondary" id="fc-prev">← Précédent</button>
+        <span class="flash-count" id="fc-count"></span>
+        <button class="btn secondary" id="fc-next">Suivant →</button>
+      </div>
+      <button class="btn" id="fc-shuffle" style="margin-top:14px;">🔀 Mélanger</button>
+    </div>
+  </section>
+
+  <!-- ============================================================ QCM -->
+  <section id="qcm" class="panel">
+    <h2 style="display:block; text-align:center;">QCM : teste tes connaissances</h2>
+    <div class="checkbox-row" id="qcm-cats"></div>
+    <div id="qcm-content"></div>
+  </section>
+
+  <!-- ============================================================ CHRONO -->
+  <section id="chrono" class="panel">
+    <h2 style="display:block; text-align:center;">Chronologie : reconstitue l'histoire</h2>
+    <div class="tip">Les étapes sont mélangées. Clique sur <strong>Événements</strong> puis sur <strong>Dates</strong> pour les associer, ou lis la frise complète en dessous.</div>
+    <div id="chrono-game"></div>
+    <div style="text-align:center; margin:10px 0;">
+      <button class="btn" id="chrono-check">Vérifier</button>
+      <button class="btn secondary" id="chrono-again">Recommencer</button>
+    </div>
+    <div id="chrono-frise"></div>
+  </section>
+
+  <!-- ============================================================ CALIFATS -->
+  <section id="califats" class="panel">
+    <h2 style="display:block; text-align:center;">Le tableau des califats rivaux</h2>
+    <div class="tip">Complète les cases avec les menus déroulants, puis vérifie. Réfléchis bien : c'est LE tableau à connaître pour le contrôle !</div>
+    <div style="overflow-x:auto;">
+      <table class="hydra" id="hydra-table"></table>
+    </div>
+    <div class="tip" id="hydra-feedback" style="display:none;"></div>
+    <div style="text-align:center; margin-top:12px;">
+      <button class="btn" id="hydra-check">Vérifier</button>
+      <button class="btn secondary" id="hydra-show">Voir le corrigé</button>
+    </div>
+  </section>
+</main>
+
+<footer>App de révision · Histoire 5<sup>e</sup> · Chapitre 2 « Chrétientés et Islam » — fonctionne hors ligne, aucune donnée n'est envoyée.</footer>
+
+<script>
+"use strict";
+
+/* ============================== DONNÉES ============================== */
+
+var NOTIONS = [
+  {titre:"Islam", def:"Nom de la religion prêchée par Muhammad : soumission à Allah. Sans majuscule pour la religion.", cat:"religion"},
+  {titre:"Allah", def:"Dieu en arabe.", cat:"religion"},
+  {titre:"Musulman", def:"Croyant de l'islam.", cat:"religion"},
+  {titre:"Prophète", def:"Homme chargé par Dieu de transmettre ses paroles.", cat:"religion"},
+  {titre:"Coran", def:"Texte sacré de l'islam : 114 sourates, considéré comme la parole divine dictée à Muhammad.", cat:"religion"},
+  {titre:"Mosquée", def:"Lieu de prière et de rassemblement des musulmans.", cat:"religion"},
+  {titre:"Hégire", def:"Départ de Muhammad de La Mecque vers Médine (622) : « année 0 » du calendrier musulman.", cat:"religion"},
+  {titre:"Djihad", def:"« L'effort » que doivent fournir les musulmans pour rester dans le droit chemin ; peut désigner la guerre religieuse menée contre les non-musulmans.", cat:"religion"},
+  {titre:"Bédouin", def:"Membre des tribus nomades du désert d'Arabie.", cat:"religion"},
+  {titre:"Sunnites", def:"Musulmans qui pensent que le chef de la communauté peut être choisi parmi les musulmans.", cat:"religion"},
+  {titre:"Chiites", def:"Musulmans qui pensent que le pouvoir doit revenir à Ali, cousin et gendre de Muhammad, puis à ses descendants.", cat:"religion"},
+  {titre:"Calife", def:"Successeur du prophète Muhammad. Chef religieux, politique et militaire de l'empire musulman.", cat:"pouvoir"},
+  {titre:"Califat", def:"Territoire et pouvoir dirigés par un calife.", cat:"pouvoir"},
+  {titre:"Vizir", def:"Premier ministre : haut fonctionnaire qui dirige l'administration et aide le calife à gouverner.", cat:"pouvoir"},
+  {titre:"Émir", def:"Gouverneur d'une province : dirige les armées et collecte les impôts. Pas toujours fidèle au calife !", cat:"pouvoir"},
+  {titre:"Cadis", def:"Juges qui rendent la justice dans les provinces.", cat:"pouvoir"},
+  {titre:"Sultan", def:"Titre pris par les Turcs à Bagdad en 1058 : pouvoir guerrier, le calife n'a plus qu'un rôle honorifique.", cat:"pouvoir"},
+  {titre:"Arabe", def:"Désigne à l'origine les Bédouins et leur langue ; puis un peuple, une religion et un empire.", cat:"pouvoir"},
+  {titre:"Souk", def:"Marché de la ville musulmane.", cat:"civilisation"},
+  {titre:"Maison de la sagesse", def:"Institution fondée à Bagdad par le calife al-Mamûn : savants venus de tout le monde musulman y étudient maths, astronomie, médecine, géographie.", cat:"civilisation"},
+  {titre:"Croisade", def:"Expédition militaire chrétienne organisée pour libérer la Terre sainte et le tombeau du Christ à Jérusalem (1095-1270).", cat:"echanges"},
+  {titre:"Reconquista", def:"Mot espagnol : la lente reconquête de la péninsule ibérique par les chrétiens face aux musulmans (jusqu'à Grenade, 1492).", cat:"echanges"},
+  {titre:"Al-Andalus", def:"Territoire musulman d'Espagne : espace de rencontres entre musulmans, chrétiens et juifs.", cat:"echanges"}
+];
+
+var QCM = [
+  {cat:"naissance", q:"Où et quand l'islam naît-il ?", a:["Au VIIe siècle en Arabie", "Au VIIIe siècle en Espagne", "Au VIe siècle à Byzance", "Au VIIe siècle en Égypte"], c:0, e:"L'islam naît au VIIe siècle en Arabie, peuplée de Bédouins polythéistes."},
+  {cat:"naissance", q:"Qui est Muhammad ?", a:["Un roi de Perse", "Un marchand de La Mecque devenu prophète d'Allah", "Un chef de l'empire byzantin", "Un savant de Bagdad"], c:1, e:"Muhammad est un marchand de La Mecque qui affirme avoir reçu la « Révélation » et être le prophète d'Allah."},
+  {cat:"naissance", q:"Qu'est-ce que l'Hégire ?", a:["La prise de La Mecque par Muhammad", "Le livre sacré des musulmans", "Le départ de Muhammad de La Mecque vers Médine (622)", "Le nom de la première mosquée"], c:2, e:"L'Hégire (622) marque le début du calendrier musulman."},
+  {cat:"naissance", q:"Combien de sourates compte le Coran ?", a:["5", "99", "114", "1258"], c:2, e:"Le Coran compte 114 sourates."},
+  {cat:"naissance", q:"Lequel de ces éléments n'est PAS un pilier de l'islam ?", a:["La prière", "Le ramadan", "Le pèlerinage à La Mecque", "La Reconquista"], c:3, e:"Les piliers : prière, aumône, ramadan, pèlerinage à La Mecque, profession de foi — le djihad est « l'effort » du croyant."},
+  {cat:"naissance", q:"Sunnites et chiites se sont séparés à cause de…", a:["…une question de succession après Muhammad", "…une guerre commerciale", "…la langue parlée", "…la construction de La Mecque"], c:0, e:"Même religion : le désaccord porte sur le chef de la communauté (choisi parmi les musulmans ou descendant d'Ali)."},
+  {cat:"pouvoir", q:"Le calife ne peut PAS…", a:["rendre la justice", "diriger les armées", "vendre son titre de sultan", "détenir le pouvoir religieux"], c:2, e:"Le calife est chef religieux, politique et militaire, il protège la population et rend la justice."},
+  {cat:"pouvoir", q:"Qui dirige l'administration et aide le calife à gouverner ?", a:["L'émir", "Le vizir", "Le cadi", "Le sultan"], c:1, e:"Le vizir est le « premier ministre » du calife."},
+  {cat:"pouvoir", q:"Les cadis sont chargés de…", a:["collecter les impôts", "rendre la justice", "conduire les conquêtes", "construire les mosquées"], c:1, e:"Les cadis rendent la justice dans les provinces."},
+  {cat:"pouvoir", q:"Que fait l'émir dans sa province ?", a:["Il dirige les armées et collecte les impôts", "Il traduit le Coran", "Il remplace le calife à sa mort", "Il enseigne à la Maison de la sagesse"], c:0, e:"L'émir gouverne une province… mais n'est pas toujours fidèle au calife."},
+  {cat:"empire", q:"Quelle dynastie règne de 661 à 750 avec Damas pour capitale ?", a:["Les Abbassides", "Les Fatimides", "Les Omeyyades", "Les Mongols"], c:2, e:"Les Omeyyades règnent de 661 à 750 depuis Damas."},
+  {cat:"empire", q:"Que se passe-t-il en 750 ?", a:["Les Mongols prennent Bagdad", "Les Abbassides renversent les Omeyyades (bataille du Grand Zab)", "Muhammad meurt", "Saladin reprend Jérusalem"], c:1, e:"À la bataille du Grand Zab, les Abbassides prennent le pouvoir et installent leur capitale à Bagdad."},
+  {cat:"empire", q:"Les Fatimides sont…", a:["des sunnites de Cordoue", "des chiites rivaux des Abbassides, qui fondent Le Caire", "des nomades mongols", "des rois chrétiens d'Espagne"], c:1, e:"Dès 909, les Fatimides (chiites) fondent un califat rival en Afrique du Nord puis en Égypte (Le Caire, 969)."},
+  {cat:"empire", q:"Jusqu'où s'étend l'empire musulman au VIIIe siècle ?", a:["De l'Espagne jusqu'aux portes de l'Inde", "Uniquement l'Arabie", "De la France à la Chine", "Seulement le désert d'Arabie"], c:0, e:"L'empire s'étend de l'Espagne (Al-Andalus) jusqu'aux portes de l'Inde."},
+  {cat:"empire", q:"En 1058, qui prend le pouvoir à Bagdad en s'octroyant le titre de sultan ?", a:["Les Mongols", "Les Turcs", "Les Fatimides", "Les croisés"], c:1, e:"Les Turcs, convertis à l'islam, laissent au calife un rôle honorifique."},
+  {cat:"chute", q:"Quel peuple prend Bagdad le 10 février 1258 ?", a:["Les croisés", "Les Turcs", "Les Mongols", "Les Abbassides"], c:2, e:"Les Mongols de Houlégou Khan, petit-fils de Gengis Khan, prennent Bagdad en 1258."},
+  {cat:"chute", q:"Quelles conséquences a la chute de Bagdad ?", a:["Le calife abbasside est tué : fin du pouvoir des Abbassides", "La ville est pillée et en partie détruite", "De nombreux manuscrits et bibliothèques sont perdus", "Tout cela à la fois"], c:3, e:"La prise de Bagdad (1258) marque la fin du califat abbasside : massacres, pillages, destruction des bibliothèques."},
+  {cat:"civilisation", q:"La civilisation arabo-musulmane médiévale est avant tout…", a:["urbaine", "rurale", "nomade", "sans villes"], c:0, e:"C'est une civilisation urbaine : la ville regroupe les pouvoirs religieux, politiques et commerciaux."},
+  {cat:"civilisation", q:"La Maison de la sagesse, fondée par al-Mamûn, se trouve…", a:["à Cordoue", "au Caire", "à Bagdad", "à Médine"], c:2, e:"À Bagdad, des savants y étudient mathématiques, astronomie, médecine et géographie."},
+  {cat:"civilisation", q:"Quelles marchandises arrive-t-on à Bagdad ?", a:["Porcelaine et papier de Chine", "Épices et pierres précieuses d'Inde", "Or venu d'Afrique", "Tout cela à la fois"], c:3, e:"Bagdad est au croisement de nombreuses routes commerciales terrestres, maritimes et fluviales (deux ports sur le Tigre)."},
+  {cat:"civilisation", q:"Que conserve, transmet et enrichit la civilisation arabo-musulmane ?", a:["Les savoirs de l'Antiquité gréco-romaine", "Uniquement le Coran", "Les jeux olympiques", "Les cartes marines vikings"], c:0, e:"Les œuvres des savants de l'Antiquité sont traduites en arabe puis en latin ; les Arabes diffusent le chiffre zéro et leurs savoirs en médecine."},
+  {cat:"echanges", q:"Qui lance la première croisade en 1095 ?", a:["Le roi de France", "Le pape Urbain II", "Saladin", "L'empereur byzantin"], c:1, e:"Le pape Urbain II lance la croisade pour « libérer » l'accès aux lieux saints de Jérusalem."},
+  {cat:"echanges", q:"En 1187, quel chef musulman reprend Jérusalem ?", a:["Houlégou Khan", "Abu Bakr", "Saladin", "Al-Mansûr"], c:2, e:"Saladin reprend Jérusalem aux croisés en 1187."},
+  {cat:"echanges", q:"Qu'est-ce que la Reconquista ?", a:["Une nouvelle conquête musulmane de l'Espagne", "La reconquête de la péninsule ibérique par les chrétiens", "Le pèlerinage à La Mecque", "La prise de Bagdad par les Mongols"], c:1, e:"Les royaumes chrétiens du Nord reprennent lentement l'Espagne ; elle s'achève par la prise de Grenade en 1492."},
+  {cat:"echanges", q:"En Al-Andalus, quelles populations se côtoient et échangent ?", a:["Musulmanes, chrétiennes et juives", "Seulement des musulmans", "Seulement des chrétiens", "Des Mongols et des Turcs"], c:0, e:"Cette coexistence favorise des échanges culturels, scientifiques, artistiques et commerciaux."}
+];
+
+var CHRONO = [
+  {d:"622", t:"Hégire : Muhammad quitte La Mecque pour Médine"},
+  {d:"630", t:"Muhammad conquiert La Mecque"},
+  {d:"632", t:"Mort de Muhammad : début des premiers califes"},
+  {d:"661-750", t:"Califat omeyyade (capitale : Damas)"},
+  {d:"750", t:"Bataille du Grand Zab : les Abbassides prennent le pouvoir"},
+  {d:"762", t:"Fondation de Bagdad, capitale des Abbassides"},
+  {d:"909", t:"Début du califat fatimide (Le Caire)"},
+  {d:"1058", t:"Les Turcs prennent le pouvoir à Bagdad (titre de sultan)"},
+  {d:"1095", t:"Le pape Urbain II lance la première croisade"},
+  {d:"1099", t:"Les croisés prennent Jérusalem"},
+  {d:"1187", t:"Saladin reprend Jérusalem"},
+  {d:"1258", t:"Les Mongols prennent et pillent Bagdad"},
+  {d:"1492", t:"Prise de Grenade : fin de la Reconquista"}
+];
+
+var CALIFATS = {
+  lignes:["Capitale", "Dates", "Branche de l'islam", "Territoires principaux"],
+  colonnes:["Premiers califes", "Califat omeyyade", "Califat abbasside", "Califat fatimide"],
+  corrige:[
+    ["Médine", "Damas", "Bagdad", "Le Caire"],
+    ["632-661", "661-750", "750-1258", "909-1171"],
+    ["Sunnites", "Sunnites", "Sunnites", "Chiites"],
+    ["Péninsule arabique", "Espagne, Maghreb, Asie centrale, Inde", "Irak, Iran, Moyen-Orient", "Maghreb, Égypte, Proche-Orient"]
+  ]
+};
+
+/* ============================== OUTILS ============================== */
+
+function melanger(arr){
+  var a = arr.slice();
+  for(var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+/* ============================== FLASHCARDS ============================== */
+
+var fcIndex = 0, fcListe = NOTIONS.slice(), fcCats = ["toutes","religion","pouvoir","civilisation","echanges"];
+var fcCatLabels = {toutes:"Toutes", religion:"Religion", pouvoir:"Pouvoir", civilisation:"Civilisation", echanges:"Échanges"};
+
+function initFlash(){
+  var box = document.getElementById("flash-cats");
+  fcCats.forEach(function(c, i){
+    var lab = el("label", "", '<input type="radio" name="fcat" value="' + c + '"' + (i === 0 ? " checked" : "") + "> " + fcCatLabels[c]);
+    box.appendChild(lab);
+  });
+  box.addEventListener("change", function(){
+    var v = box.querySelector("input:checked").value;
+    fcListe = (v === "toutes") ? NOTIONS.slice() : NOTIONS.filter(function(n){ return n.cat === v; });
+    fcListe = melanger(fcListe);
+    fcIndex = 0;
+    showFlash();
+  });
+  document.getElementById("flashcard").addEventListener("click", function(){
+    this.classList.toggle("flipped");
+  });
+  document.getElementById("fc-prev").onclick = function(){ fcIndex = (fcIndex - 1 + fcListe.length) % fcListe.length; showFlash(); };
+  document.getElementById("fc-next").onclick = function(){ fcIndex = (fcIndex + 1) % fcListe.length; showFlash(); };
+  document.getElementById("fc-shuffle").onclick = function(){ fcListe = melanger(fcListe); fcIndex = 0; showFlash(); };
+  fcListe = melanger(fcListe);
+  showFlash();
+}
+
+function showFlash(){
+  var n = fcListe[fcIndex];
+  var card = document.getElementById("flashcard");
+  card.classList.remove("flipped");
+  document.getElementById("fc-term").textContent = n.titre;
+  document.getElementById("fc-def").textContent = n.def;
+  document.getElementById("fc-count").textContent = (fcIndex + 1) + " / " + fcListe.length;
+}
+
+/* ============================== QCM ============================== */
+
+var qcmQuestions = [], qcmPos = 0, qcmScore = 0, qcmErreurs = [];
+
+function initQcm(){
+  var box = document.getElementById("qcm-cats");
+  var cats = [["toutes","Tout le chapitre"],["naissance","Naissance de l'islam"],["pouvoir","Le calife"],["empire","L'expansion"],["chute","Les Mongols"],["civilisation","La civilisation"],["echanges","Échanges & conflits"]];
+  cats.forEach(function(c, i){
+    var lab = el("label", "", '<input type="radio" name="qcat" value="' + c[0] + '"' + (i === 0 ? " checked" : "") + "> " + c[1]);
+    box.appendChild(lab);
+  });
+  box.addEventListener("change", startQcm);
+  startQcm();
+}
+
+function startQcm(){
+  var v = document.querySelector("input[name='qcat']:checked").value;
+  qcmQuestions = (v === "toutes") ? melanger(QCM) : melanger(QCM.filter(function(q){ return q.cat === v; }));
+  qcmPos = 0; qcmScore = 0; qcmErreurs = [];
+  renderQcm();
+}
+
+function renderQcm(){
+  var zone = document.getElementById("qcm-content");
+  zone.innerHTML = "";
+  if(qcmPos >= qcmQuestions.length){
+    var pct = Math.round(qcmScore / qcmQuestions.length * 100);
+    var msg = pct >= 80 ? "🏆 Excellent, tu maîtrises le chapitre !" : pct >= 60 ? "👍 Bien, encore quelques révisions et c'est parfait." : "💪 Courage : relis les fiches puis retente le QCM !";
+    var box = el("div", "result-box");
+    box.appendChild(el("div", "score", qcmScore + " / " + qcmQuestions.length));
+    box.appendChild(el("div", "msg", msg));
+    if(qcmErreurs.length){
+      var det = el("div", "card", "<h3 style='color:var(--red);'>À revoir :</h3><ul>" +
+        qcmErreurs.map(function(q){ return "<li>" + q.q + "<br><small><strong>Réponse :</strong> " + q.a[q.c] + "</small></li>"; }).join("") + "</ul>");
+      box.appendChild(det);
+    }
+    var b = el("button", "btn", "Recommencer");
+    b.onclick = startQcm;
+    box.appendChild(b);
+    zone.appendChild(box);
+    return;
+  }
+  var q = qcmQuestions[qcmPos];
+  var wrap = el("div", "card");
+  var barre = el("div", "progress-bar"); barre.innerHTML = "<div style='width:" + (qcmPos / qcmQuestions.length * 100) + "%'></div>";
+  wrap.appendChild(barre);
+  wrap.appendChild(el("div", "qcm-header", "<span>Question " + (qcmPos + 1) + " / " + qcmQuestions.length + "</span><span>Score : " + qcmScore + "</span>"));
+  wrap.appendChild(el("div", "question-text", q.q));
+  var answers = el("div", "answers");
+  var ordre = q.a.map(function(_, i){ return i; });
+  melanger(ordre).forEach(function(i){
+    var b = el("button", "answer", q.a[i]);
+    b.onclick = function(){
+      var btns = answers.querySelectorAll("button");
+      btns.forEach(function(x){ x.disabled = true; });
+      if(i === q.c){ b.classList.add("correct"); qcmScore++; }
+      else{
+        b.classList.add("wrong");
+        btns[q.c].classList.add("correct");
+        qcmErreurs.push(q);
+      }
+      wrap.appendChild(el("div", "explanation", "💡 " + q.e));
+      var next = el("button", "btn", qcmPos + 1 < qcmQuestions.length ? "Question suivante →" : "Voir mon résultat 🎯");
+      next.style.marginTop = "14px";
+      next.onclick = function(){ qcmPos++; renderQcm(); };
+      wrap.appendChild(next);
+    };
+    answers.appendChild(b);
+  });
+  wrap.appendChild(answers);
+  zone.appendChild(wrap);
+}
+
+/* ============================== CHRONOLOGIE ============================== */
+
+var chronoPool = [];
+
+function initChrono(){
+  document.getElementById("chrono-check").onclick = checkChrono;
+  document.getElementById("chrono-again").onclick = resetChrono;
+  resetChrono();
+  var frise = document.getElementById("chrono-frise");
+  frise.innerHTML = "<div class='card'><h3>La frise du chapitre (pour corriger)</h3><ul>" +
+    CHRONO.map(function(ev){ return "<li><span class='date'>" + ev.d + "</span> — " + ev.t + "</li>"; }).join("") + "</ul></div>";
+}
+
+function resetChrono(){
+  var game = document.getElementById("chrono-game");
+  game.innerHTML = "";
+  game.appendChild(el("p", "", "<strong>Événements (clique dans le bon ordre historique)</strong> :"));
+  chronoPool = melanger(CHRONO.map(function(_, i){ return i; }));
+  var pool = el("div", "chrono-pool");
+  chronoPool.forEach(function(i){
+    var chip = el("button", "chrono-chip", CHRONO[i].t);
+    chip.onclick = function(){
+      if(chip.dataset.used) return;
+      chip.dataset.used = "1";
+      chip.style.opacity = ".35";
+      var dz = game.querySelector("#zone-histo");
+      var placed = el("button", "chrono-chip", CHRONO[i].t);
+      placed.onclick = function(){
+        chip.dataset.used = "";
+        chip.style.opacity = "1";
+        placed.remove();
+      };
+      dz.appendChild(placed);
+    };
+    pool.appendChild(chip);
+  });
+  game.appendChild(pool);
+  var dz = el("div", "chrono-zone"); dz.id = "zone-histo";
+  game.appendChild(el("p", "", "<strong>Ta frise</strong> (clique un élément pour le retirer) :"));
+  game.appendChild(dz);
+  game.appendChild(el("p", "tip", "Astuce : place d'abord les grandes dates repères (622, 632, 750, 1258…)."));
+}
+
+function checkChrono(){
+  var dz = document.getElementById("zone-histo");
+  var placed = Array.prototype.map.call(dz.querySelectorAll(".chrono-chip"), function(c){
+    return CHRONO.findIndex(function(ev){ return ev.t === c.textContent; });
+  });
+  var annee = function(i){ return parseInt(CHRONO[i].d, 10); };
+  dz.querySelectorAll(".chrono-chip").forEach(function(chip, i){
+    var idx = placed[i];
+    var avantOk = i === 0 || annee(placed[i - 1]) <= annee(idx);
+    var apresOk = i === placed.length - 1 || annee(idx) <= annee(placed[i + 1]);
+    var bonnePlace = avantOk && apresOk;
+    chip.classList.remove("correct", "wrong");
+    chip.classList.add(bonnePlace ? "correct" : "wrong");
+  });
+  var g = dz.querySelectorAll(".chrono-chip.wrong").length;
+  var game = document.getElementById("chrono-game");
+  var old = document.getElementById("chrono-msg");
+  if(old) old.remove();
+  var msg = placed.length === 0 ? "Place d'abord des événements !"
+    : (g === 0 ? "🎉 Parfait ! Ta frise est dans le bon ordre." : g + " élément(s) mal placé(s) (en rouge). Compare avec la frise corrigée ci-dessous.");
+  game.appendChild(el("p", "tip", msg)).id = "chrono-msg";
+}
+
+/* ============================== CALIFATS ============================== */
+
+function initHydra(){
+  var table = document.getElementById("hydra-table");
+  var thead = el("thead");
+  var hr = el("tr");
+  hr.appendChild(el("th", "", ""));
+  CALIFATS.colonnes.forEach(function(c){ hr.appendChild(el("th", "", c)); });
+  thead.appendChild(hr);
+  table.appendChild(thead);
+  var tbody = el("tbody");
+  var options = {
+    0: ["?", "Damas", "Bagdad", "Médine", "Le Caire", "Cordoue"],
+    1: ["?", "632-661", "661-750", "750-1258", "909-1171"],
+    2: ["?", "Sunnites", "Chiites"],
+    3: ["?", "Péninsule arabique", "Espagne, Maghreb, Asie centrale, Inde", "Irak, Iran, Moyen-Orient", "Maghreb, Égypte, Proche-Orient"]
+  };
+  CALIFATS.lignes.forEach(function(ligne, li){
+    var tr = el("tr");
+    tr.appendChild(el("th", "", ligne));
+    CALIFATS.colonnes.forEach(function(_, ci){
+      var td = el("td");
+      var sel = document.createElement("select");
+      sel.dataset.ligne = li;
+      sel.dataset.col = ci;
+      options[li].forEach(function(o){
+        var op = document.createElement("option");
+        op.textContent = o;
+        sel.appendChild(op);
+      });
+      td.appendChild(sel);
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  document.getElementById("hydra-check").onclick = checkHydra;
+  document.getElementById("hydra-show").onclick = showHydra;
+}
+
+function checkHydra(){
+  var table = document.getElementById("hydra-table");
+  var bonne = 0, total = 0;
+  table.querySelectorAll("select").forEach(function(sel){
+    var l = +sel.dataset.ligne, c = +sel.dataset.col;
+    if(sel.value === "?"){ sel.parentElement.classList.remove("ok", "ko"); return; }
+    total++;
+    var ok = sel.value === CALIFATS.corrige[l][c];
+    sel.parentElement.classList.toggle("ok", ok);
+    sel.parentElement.classList.toggle("ko", !ok);
+    if(ok) bonne++;
+  });
+  var fb = document.getElementById("hydra-feedback");
+  fb.style.display = "block";
+  fb.innerHTML = total === 0 ? "Choisis au moins une case !"
+    : (bonne === CALIFATS.lignes.length * CALIFATS.colonnes.length ? "🎉 Parfait, tout est juste !" : bonne + " bonne(s) réponse(s) sur " + total + ". Les cases rouges sont à revoir.");
+}
+
+function showHydra(){
+  var table = document.getElementById("hydra-table");
+  table.querySelectorAll("select").forEach(function(sel){
+    var l = +sel.dataset.ligne, c = +sel.dataset.col;
+    sel.value = CALIFATS.corrige[l][c];
+    sel.parentElement.classList.add("ok");
+  });
+  var fb = document.getElementById("hydra-feedback");
+  fb.style.display = "block";
+  fb.style.background = "var(--green-l)";
+  fb.innerHTML = "Corrigé affiché. Cache-le et réessaie de tête : <button class='btn secondary' onclick='document.querySelectorAll(\"#hydra-table select\").forEach(function(s){s.value=\"?\";s.parentElement.classList.remove(\"ok\",\"ko\")});document.getElementById(\"hydra-feedback\").style.display=\"none\"'>Tout effacer</button>";
+}
+
+/* ============================== NAVIGATION ============================== */
+
+document.querySelectorAll("nav button").forEach(function(btn){
+  btn.onclick = function(){
+    document.querySelectorAll("nav button").forEach(function(b){ b.classList.remove("active"); });
+    btn.classList.add("active");
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.remove("visible"); });
+    document.getElementById(btn.dataset.tab).classList.add("visible");
+    window.scrollTo(0, 0);
+  };
+});
+
+initFlash();
+initQcm();
+initChrono();
+initHydra();
+</script>
+</body>
+</html>
